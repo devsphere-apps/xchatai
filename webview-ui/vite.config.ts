@@ -7,11 +7,13 @@ export default defineConfig({
     outDir: '../out/webview-ui',
     emptyOutDir: true,
     rollupOptions: {
-      input: './index.html',
+      input: 'index.html',
       output: {
+        entryFileNames: 'index.js',
         format: 'iife',
-        entryFileNames: '[name].js',
+        dir: '../out/webview-ui'
       },
     },
   },
+  base: '',
 });

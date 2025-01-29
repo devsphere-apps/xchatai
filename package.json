@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./dist/extension.js",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
@@ -51,7 +51,10 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "test": "vscode-test",
-    "build": "yarn run compile"
+    "build": "yarn run compile",
+    "build:webview": "cd webview-ui && yarn build",
+    "build:extension": "yarn compile",
+    "build:all": "yarn build:webview && yarn build:extension"
   },
   "devDependencies": {
     "@types/vscode": "^1.96.0",

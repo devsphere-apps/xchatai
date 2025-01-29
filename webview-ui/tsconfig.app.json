@@ -8,10 +8,9 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "outDir": "./dist",
+    "outDir": "./out",
     "jsx": "react-jsx",
 
     /* Linting */

@@ -12,38 +12,33 @@ export function activate(context: vscode.ExtensionContext) {
           enableScripts: true,
           retainContextWhenHidden: true,
           localResourceRoots: [
-            vscode.Uri.file(path.join(context.extensionPath, 'out/webview-ui')),
-          ],
+            vscode.Uri.file(path.join(context.extensionPath, 'out', 'webview-ui'))
+          ]
         }
       );
 
-      const reactAppPath = path.join(
-        context.extensionPath,
-        'out',
-        'webview-ui',
-        'index.html'
-      );
-
-      panel.webview.html = getWebviewContent(panel.webview, reactAppPath);
+      // Get webview content
+      const webviewPath = path.join(context.extensionPath, 'out', 'webview-ui');
+      panel.webview.html = getWebviewContent(panel.webview, webviewPath);
     })
   );
 }
 
-function getWebviewContent(webview: vscode.Webview, reactAppPath: string) {
+function getWebviewContent(webview: vscode.Webview, webviewPath: string) {
   const scriptUri = webview.asWebviewUri(
-    vscode.Uri.file(reactAppPath.replace('index.html', 'index.js'))
+    vscode.Uri.file(path.join(webviewPath, 'index.js'))
   );
 
   return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="${scriptUri}" defer></script>
-  <title>Chat Assistant</title>
-</head>
-<body class="bg-gray-100">
-  <div id="root"></div>
-</body>
-</html>`;
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Chat Assistant</title>
+    </head>
+    <body>
+      <div id="root"></div>
+      <script type="module" src="${scriptUri}"></script>
+    </body>
+  </html>`;
 }
